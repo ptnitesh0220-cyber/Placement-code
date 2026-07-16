@@ -1,37 +1,37 @@
-#include <stdio.h>
-void findmax(int fsmax[2],int i,int m,int b[][m]){
-    int max=b[i][0],smax=-1;
-    for(int k=0;k<m;k++){
-        if(max<b[i][k]){
-            smax=max;
-            max=b[i][k];
+#include<stdio.h>
+int r,c;
+void findmax(int fsmax[],int r,int dp[][c]){
+    int fmax=dp[r][0],smax=-1;
+    for(int col=1;col<c;col++){
+        if(dp[r][col]>fmax){
+            smax=fmax;
+            fmax=dp[r][col];
         }
-        else if(b[i][k]>smax)
-        smax=b[i][k];
+        else if(dp[r][col]>smax){
+            smax=dp[r][col];
+        }
     }
-    fsmax[0]=max;
+    fsmax[0]=fmax;
     fsmax[1]=smax;
 }
-
-int main() {
-	int n,m;
-	scanf("%d%d",&n,&m);
-	int a[n][m],b[n][m];
-	int m1=0,m2=-1;
-	for(int i=0;i<n;i++){
-	    for(int j=0;j<m;j++){
-	        scanf("%d",a[i][j]);
-	        if(i==0){
-	            b[i][j]=a[i][j];
-	        }
-	    }
-	}
-	int fsmax[2];
-	for(int i=1;i<n;i++){
-	    findmax(fsmax,i-1,m,b);
-	    for(int j=0;j<m;j++){
-	        b[i][j]=b[i][j]+(b[i-1][j]==fsmax[0])?fsmax[1]:fsmax[0];
-	    }
-	}
-	printf("%d",findmax(int fsmax[2],n-1,m,b));
+int main(){
+    scanf("%d%d",&r,&c);
+    int mat[r][c],dp[r][c];
+    for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
+            scanf("%d",&mat[i][j]);
+            if(i==0){
+                dp[0][j]=mat[i][j];
+            }
+        }
+    }
+    int fsmax[2];
+    for(int i=1;i<r;i++){
+        findmax(fsmax,i-1,dp);
+        for(int j=0;j<c;j++){
+            dp[i][j]=mat[i][j]+(dp[i-1][j]==fsmax[0]?fsmax[1]:fsmax[0]);
+        }
+    }
+    findmax(fsmax,r-1,dp);
+    printf("%d",fsmax[0]);
 }
