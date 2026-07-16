@@ -34,3 +34,4 @@ int main() {
 	    }
 	}
 	printf("%d",findmax(int fsmax[2],n-1,m,b));
+}
