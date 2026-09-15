@@ -1,0 +1,23 @@
+import java.util.*;
+class Main
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int[] a=new int[n];
+		for(int i=0;i<n;i++)a[i]=sc.nextInt();
+		int sum=0,fmax=0;
+		for(int i=0;i<n;i++){
+		    sum+=a[i];
+		    fmax+=i*a[i];
+		}
+		int max=fmax;
+		for(int i=n-1;i>=0;i--){
+		    fmax+=sum-(n*a[i]);
+		    max=Math.max(fmax,max);
+		}
+		System.out.println(max);
+
+	}
+}
