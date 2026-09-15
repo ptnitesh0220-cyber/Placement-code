@@ -1,0 +1,32 @@
+import java.util.*;
+class Main
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int[] nums=new int[n];
+		for(int i=0;i<n;i++)nums[i]=sc.nextInt();
+		String[] a=new String[n];
+		for(int i=0;i<n;i++)a[i]=String.valueOf(nums[i]);
+		for(int i=0;i<n;i++){
+		    for(int j=i+1;j<n;j++){
+		        String a1=a[i]+a[j];
+		        String b1=a[j]+a[i];
+		        if(b1.compareTo(a1)>0){
+		            String t=a[i];
+		            a[i]=a[j];
+		            a[j]=t;
+		        }
+		    }
+		}
+		if(a[0].equals("0")){
+		    System.out.print("0");
+		    return;
+		}
+		String ans="";
+		for(int i=0;i<n;i++)
+		ans+=a[i];
+		System.out.println(ans);
+	}
+}
