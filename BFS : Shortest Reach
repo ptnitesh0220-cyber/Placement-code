@@ -1,0 +1,39 @@
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        int t=sc.nextInt();
+        while(t-->0){
+            int n=sc.nextInt();
+            int m=sc.nextInt();
+            ArrayList<Integer>[] g=new ArrayList[n+1];
+            for(int i=1;i<=n;i++)g[i]=new ArrayList<>();
+            for(int i=0;i<m;i++){
+                int a=sc.nextInt();
+                int b=sc.nextInt();
+                g[a].add(b);
+                g[b].add(a);
+            }
+            int s=sc.nextInt();
+            Queue<int[]> q=new LinkedList<>();
+            q.add(new int[]{s,0});
+            int[] d=new int[n+1];
+            Arrays.fill(d,-1);
+            while(!q.isEmpty()){
+                int[] a=q.poll();
+                int node=a[0],dst=a[1];
+                for(int x:g[node]){
+                    if(d[x]==-1){
+                        d[x]=dst+6;
+                        q.add(new int[]{x,dst+6});
+                    }
+                }
+            }
+            for(int i=1;i<=n;i++){
+                if(i!=s)
+                System.out.print(d[i]+" ");
+            }
+            System.out.println();
+        }
+    }
+}
